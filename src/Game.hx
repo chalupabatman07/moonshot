@@ -1,6 +1,4 @@
-import map.UpdTools;
-import map.UniformPoissonDisk;
-import map.UniformPoissonDisk.Point;
+import en.Earth;
 import en.Hero;
 import dn.Process;
 import hxd.Key;
@@ -45,20 +43,15 @@ class Game extends Process {
     root.add(scroller, Const.DP_BG);
     scroller.filter = new h2d.filter.ColorMatrix(); // force rendering for pixel perfect
 
-    new Hero(5, 5);
     world = new World();
     camera = new Camera();
     fx = new Fx();
     hud = new ui.Hud();
     level = new Level(world.all_levels.FirstLevel);
 
-    // Graph + map shit
-    var center = new Point(0, 0);
-    var radius = 10.0;
-    var minDist = 5;
-    var upd = new UniformPoissonDisk();
-    var samples: Array<Point> = upd.sampleCircle(center, radius, minDist);
-    trace('points($samples.length) sampled in circle(c=$UpdTools.pointToStr(c), r=$radius): $UpdTools.pointArrayToStr(samples)');
+    // Entity initalization
+    new Hero(5, 5);
+    new Earth();
 
     Process.resizeAll();
     trace(Lang.t._("Game is ready."));

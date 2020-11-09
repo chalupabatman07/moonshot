@@ -1,3 +1,7 @@
+import map.UpdTools;
+import map.UniformPoissonDisk;
+import map.UniformPoissonDisk.Point;
+
 class Level extends dn.Process {
   public var game(get, never): Game; inline function get_game() return Game.ME;
   public var fx(get, never): Fx; inline function get_fx() return Game.ME.fx;
@@ -11,11 +15,27 @@ class Level extends dn.Process {
   var marks: Map<LevelMark, Map<Int,Bool>> = new Map();
   var invalidated = true;
 
+  // Graph + map variables
+  var mapCenter: Point;
+  var mapRadius: Float;
+  var samples: Array<Point>;
+  public var graphCenter(get, never): Point; inline function get_graphCenter() return mapCenter;
+  public var graphRadius(get, never): Float; inline function get_graphRadius() return mapRadius;
+  public var graphSamples(get, never): Array<Point>; inline function get_graphSamples() return samples;
+
   public function new(l: World.World_Level) {
     super(Game.ME);
     createRootInLayers(Game.ME.scroller, Const.DP_BG);
     level = l;
     tilesetSource = hxd.Res.world.tiles.toTile();
+
+    // Graph + map shit
+    mapCenter = new Point(0, 0);
+    mapRadius = 10.0;
+    var minDist = 1;
+    var upd = new UniformPoissonDisk();
+    samples = upd.sampleCircle(mapCenter, mapRadius, minDist);
+    trace("points(" + samples.length + ") sampled in circle(c=" + UpdTools.pointToStr(mapCenter) + ", r=" + mapRadius + "): \n" + UpdTools.pointArrayToStr(samples) + "\n");
   }
 
   /**

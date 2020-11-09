@@ -64,7 +64,7 @@ class UpdTools {
   }
 
   public static function pointArrayToStr(points: Array<Point>): String {
-    var strArr = [for (p in points) ' $pointToStr(p)'];
-    return strArr.join('\n');
+    var strArr = [for (p in points) " " + pointToStr(p)];
+    return strArr.join("\n");
   }
 }
