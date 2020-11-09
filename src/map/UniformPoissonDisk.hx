@@ -41,8 +41,9 @@ class UniformPoissonDisk {
   public var firstPoint: Point;
 
   public function new(?firstPoint: Point): Void {
-    if (firstPoint == null) return;
-    this.firstPoint = firstPoint;
+    if (firstPoint != null) {
+      this.firstPoint = firstPoint;
+    }
   }
 
   public inline function randomPointAround(center: Point, minDistance: Float): Point {
