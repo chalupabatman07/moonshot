@@ -198,7 +198,7 @@ class UniformPoissonDisk {
   public function sample(
     topLeft: Point,
     bottomRight: Point,
-    minDistance: MinDistanceFunction,
+    minDistanceFunc: MinDistanceFunction,
     maxDistance: Float,
     ?reject: RejectionFunction,
     ?pointsPerIteration: Int
